@@ -11,12 +11,12 @@ const Button =({setValue, text}) => {
 const StatisticsLine =({text, value, percent}) => {
   if (percent==="True") {
     return(
-      <p>{text} {value}%</p>
+      <tr><td>{text}</td><td>{value}%</td></tr>
     )
   }
   else {
     return(
-      <p>{text} {value}</p>
+      <tr><td>{text}</td><td>{value}</td></tr>
     )
   }
   
@@ -35,13 +35,17 @@ const Statistics = ({good, neutral, bad, all}) => {
     return(
       <div>
         <h2>statistics</h2>
-        <StatisticsLine text="good" value={good} />
-        <StatisticsLine text="neutral" value={neutral} />
-        <StatisticsLine text="bad" value={bad} />
-        <StatisticsLine text="all" value={all} />
+        <table>
+          <tbody>
+            <StatisticsLine text="good" value={good} />
+            <StatisticsLine text="neutral" value={neutral} />
+            <StatisticsLine text="bad" value={bad} />
+            <StatisticsLine text="all" value={all} />
 
-        <StatisticsLine text="average" value={((1*good)+(-1*bad))/all} />
-        <StatisticsLine text="positive" value={good*100/all} percent="True" />
+            <StatisticsLine text="average" value={((1*good)+(-1*bad))/all} />
+            <StatisticsLine text="positive" value={good*100/all} percent="True" />
+          </tbody>
+        </table> 
       </div>
     )
   }
