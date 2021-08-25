@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 
-const Person = ({persons, search}) => {
+const Person = ({person}) => {
   return(
-    <div>
-      {persons.filter(person => person.name.contains(search))}
-      {console.log(persons)}
-    </div>
+    <p>{person.name} {person.number}</p>
   )
 }
 
@@ -19,6 +16,10 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newSearch, setNewSearch ] = useState('')
+
+  const personsToShow = newSearch 
+    ? persons.filter(person => person.name.toLowerCase().match(newSearch))
+    : persons
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -77,7 +78,10 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <Person persons={persons} search={newSearch} />
+      <div>
+        {personsToShow.map(person =>
+          <Person key={person.name} person={person} />)}
+      </div>
     </div>
   )
 
